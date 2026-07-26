@@ -1,13 +1,14 @@
 
-一共两个节点 需要<单独>放入comfyui目录
-一.
+一共两个节点 需要单独放入comfyui目录
+
+一.画廊输出的是图片元数据 可以通过ai进行提取提示词等信息 如果有的话
+comfyui标出的图 可以直接拖出来就有工作流 但是工作流五花八门 能看到啥就看运气了
 <img width="1769" height="861" alt="Snipaste_2026-05-20_15-15-51" src="https://github.com/user-attachments/assets/ef994921-4c45-42f0-9d36-d04c1c87bf58" />
 
 
 
 
-画廊输出的是图片元数据 可以通过ai进行提取提示词等信息 如果有的话
-comfyui标出的图 可以直接拖出来就有工作流 但是工作流五花八门 能看到啥就看运气了
+
 
 <img width="1345" height="931" alt="image" src="https://github.com/user-attachments/assets/e71c7571-4bde-4866-8a0d-14fdd01f9a09" />
 
