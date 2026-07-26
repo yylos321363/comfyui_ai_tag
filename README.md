@@ -1,6 +1,6 @@
 
-两个节点 需要单独放入comfyui目录
-
+一共两个节点 需要<单独>放入comfyui目录
+一.
 <img width="1769" height="861" alt="Snipaste_2026-05-20_15-15-51" src="https://github.com/user-attachments/assets/ef994921-4c45-42f0-9d36-d04c1c87bf58" />
 
 
@@ -14,7 +14,7 @@ comfyui标出的图 可以直接拖出来就有工作流 但是工作流五花�
 不然的话就只能反推出图了
 
 
-TAG提示词库融合的Danbooru / NovelAI 标签超市https://github.com/wfjsw/danbooru-diffusion-prompt-builder
+二.TAG提示词库融合的Danbooru / NovelAI 标签超市https://github.com/wfjsw/danbooru-diffusion-prompt-builder
 和AI咒语https://docs.google.com/spreadsheets/d/16wR5Zg_aQEbxLdrTOrB9cZf8QmsMrJnSGxFKbZVtrKc/edit?pli=1&gid=130296309#gid=130296309。
 差不多5000左右个词
 <img width="1626" height="701" alt="image" src="https://github.com/user-attachments/assets/0e59f1c3-df70-48b6-8055-26eca1cf2784" />
