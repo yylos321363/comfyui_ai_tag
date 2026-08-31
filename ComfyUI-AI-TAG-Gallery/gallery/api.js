@@ -44,7 +44,11 @@ export function normalizeAssetPath(imagePath) {
 }
 
 export function buildAssetUrl(imagePath) {
-    return `${getAssetBaseUrl()}${normalizeAssetPath(imagePath)}`;
+    const fullUrl = `${getAssetBaseUrl()}${normalizeAssetPath(imagePath)}`;
+    // Route image loads through the backend proxy so the CDN's Referer
+    // hotlink protection is satisfied (the CDN 403s with any other referer,
+    // including the local ComfyUI origin the browser sends).
+    return `/gallery/api/image?url=${encodeURIComponent(fullUrl)}`;
 }
 
 export async function fetchSiteConfig() {

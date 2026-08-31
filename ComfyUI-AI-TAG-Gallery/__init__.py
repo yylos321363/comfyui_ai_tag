@@ -2,7 +2,13 @@ import asyncio
 import json
 import time
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse, unquote
+
+_IMAGE_ALLOWED_HOSTS = ("ai-img.10118899.xyz",)
+_IMAGE_FETCH_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Referer": "https://aitag.win/",
+}
 
 WEB_DIRECTORY = "."
 
@@ -371,6 +377,38 @@ async def proxy_config_api(request):
     finally:
         if _PENDING_CONFIG_REQUEST is pending_request:
             _PENDING_CONFIG_REQUEST = None
+
+
+@server.PromptServer.instance.routes.get("/gallery/api/image")
+async def proxy_gallery_image(request):
+    raw_url = request.query.get("url", "")
+    if not raw_url:
+        return web.json_response({"error": "missing url"}, status=400)
+
+    try:
+        target = urlparse(unquote(raw_url))
+    except Exception:
+        return web.json_response({"error": "invalid url"}, status=400)
+
+    if not target.scheme or target.scheme not in ("http", "https") or target.netloc not in _IMAGE_ALLOWED_HOSTS:
+        return web.json_response({"error": "blocked host"}, status=403)
+
+    session = await get_shared_client_session()
+    try:
+        async with session.get(target.geturl(), headers=_IMAGE_FETCH_HEADERS, timeout=30) as upstream:
+            if upstream.status != 200:
+                return web.json_response({"error": f"upstream {upstream.status}"}, status=502)
+            body = await upstream.read()
+    except Exception:
+        return web.json_response({"error": "fetch failed"}, status=502)
+
+    return web.Response(
+        body=body,
+        headers={
+            "Content-Type": "image/webp",
+            "Cache-Control": "public, max-age=86400",
+        },
+    )
 
 
 @server.PromptServer.instance.routes.get("/gallery/api/title-blacklist")

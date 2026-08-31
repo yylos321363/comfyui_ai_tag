@@ -79,7 +79,10 @@ def _requests_session():
         return session
 
     session = requests.Session()
-    session.headers.update({"User-Agent": USER_AGENT})
+    session.headers.update({
+        "User-Agent": USER_AGENT,
+        "Referer": "https://aitag.win/",
+    })
     adapter = HTTPAdapter(pool_connections=16, pool_maxsize=32, max_retries=0)
     session.mount("http://", adapter)
     session.mount("https://", adapter)
